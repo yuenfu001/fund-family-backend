@@ -4,10 +4,15 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import formData
 from .serializers import formDataSerializer
+from drf_yasg.utils import swagger_auto_schema
 # Create your views here.
 
 #CREATE FORM USING POST REQUEST
-
+@swagger_auto_schema(
+        methods=["POST"],
+        request_body=formDataSerializer,
+        operation_description= "Add Forms"      
+)
 @api_view(["POST"])
 def createForm(request):
     if request.method == "POST":
@@ -27,7 +32,11 @@ def getAllForm(request):
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 #Unique forms using GET, PUT AND DELETE REQUEST
-
+@swagger_auto_schema(
+        methods=["PUT","DELETE"],
+        request_body=formDataSerializer,
+        operation_description= "Add Forms"      
+)
 @api_view(["GET","PUT","DELETE"])
 def specificForm(request, pk):
     get_specific_form = get_object_or_404(formData, id=pk)

@@ -22,7 +22,7 @@ from drf_yasg.views import get_schema_view
 
 scheme_view = get_schema_view(
     openapi.Info(
-        title="resume_async",
+        title="fund_family_backend",
         default_version="V1",
         description="Creating Async API for user and resume",
         terms_of_service="https://www.ouch.com/terms/",
@@ -35,8 +35,8 @@ scheme_view = get_schema_view(
  
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("try_the_admin_and_see/", admin.site.urls),
     path("", include("forms.urls")),
-    path("", scheme_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui")
-    path("redoc", scheme_view.with_ui("ewdoc", cache_timeout=0), name="schema_ewdoc")
+    path("", scheme_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
+    path("redoc/", scheme_view.with_ui("redoc", cache_timeout=0), name="schema_redoc"),
 ]
