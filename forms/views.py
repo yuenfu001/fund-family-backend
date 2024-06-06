@@ -11,7 +11,7 @@ from drf_yasg.utils import swagger_auto_schema
 @swagger_auto_schema(
         methods=["POST"],
         request_body=formDataSerializer,
-        operation_description= "Add Forms"      
+        operation_description= "Create Forms"      
 )
 @api_view(["POST"])
 def createForm(request):
@@ -35,7 +35,7 @@ def getAllForm(request):
 @swagger_auto_schema(
         methods=["PUT","DELETE"],
         request_body=formDataSerializer,
-        operation_description= "Add Forms"      
+        operation_description= "Update and Delete Forms"      
 )
 @api_view(["GET","PUT","DELETE"])
 def specificForm(request, pk):
