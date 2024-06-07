@@ -25,8 +25,8 @@ SECRET_KEY = "vxsWujapNDP430W3PyScejgbmydt3bJP9hbKptHf_HKTRfI2EyGF-4hI-xEVdfZY9I
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ ]
-
+ALLOWED_HOSTS = ["fund-family-backend-production.up.railway.app/"]
+CSRF_TRUSTED_ORIGINS = ['https://fund-family-backend-production.up.railway.app']
 
 # Application definition
 
