@@ -20,10 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("KEY")
+SECRET_KEY = "vxsWujapNDP430W3PyScejgbmydt3bJP9hbKptHf_HKTRfI2EyGF-4hI-xEVdfZY9IQ"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("BUG")
+DEBUG = True
 
 ALLOWED_HOSTS = [ ]
 
@@ -49,6 +49,8 @@ REST_FRAMEWORK = {
     ],
 }
 # ASGI_APPLICATION = 'core.asgi.application'
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS':{
@@ -152,7 +154,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
-
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),  # Assuming BASE_DIR is already defined in your settings
+]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
