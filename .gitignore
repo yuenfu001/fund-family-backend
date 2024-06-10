@@ -127,3 +127,6 @@ GitHub.sublime-settings
 #virtual environment
 poetry.lock
 pyproject.toml
+
+#database
+db.sqlite3
