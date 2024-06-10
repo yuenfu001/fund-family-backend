@@ -20,10 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "vxsWujapNDP430W3PyScejgbmydt3bJP9hbKptHf_HKTRfI2EyGF-4hI-xEVdfZY9IQ"
+SECRET_KEY = config("KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("BUG")
 
 ALLOWED_HOSTS = ["fund-family-backend-production.up.railway.app","*"]
 CSRF_TRUSTED_ORIGINS = ['https://fund-family-backend-production.up.railway.app']
@@ -107,12 +107,12 @@ WSGI_APPLICATION = "fund_family_backend.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "railway",
-        "USER": "postgres",
-        "PASSWORD": "KdyZwtXFADOsVgknvXINYotEPuXukbkU",
-        "HOST": "monorail.proxy.rlwy.net",
-        "PORT": "54275",
+        "ENGINE": config("ENGINE"),
+        "NAME": config("NAME"),
+        "USER": config("USER"),
+        "PASSWORD": config("PASSWORD"),
+        "HOST": config("HOST"),
+        "PORT": config("PORT"),
     }
 }
 
