@@ -27,7 +27,7 @@ SECRET_KEY = config("KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("BUG")
 
-ALLOWED_HOSTS = ["fund-family-backend-production.up.railway.app", "localhost:5173"]
+ALLOWED_HOSTS = ["fund-family-backend-production.up.railway.app", "localhost:5173","*"]
 CSRF_TRUSTED_ORIGINS = [
     "https://fund-family-backend-production.up.railway.app",
     "http://localhost:5173",
