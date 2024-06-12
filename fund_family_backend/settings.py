@@ -9,9 +9,11 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+
 import os
 from pathlib import Path
 from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,8 +27,14 @@ SECRET_KEY = config("KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("BUG")
 
-ALLOWED_HOSTS = ["fund-family-backend-production.up.railway.app","*"]
-CSRF_TRUSTED_ORIGINS = ['https://fund-family-backend-production.up.railway.app']
+ALLOWED_HOSTS = ["fund-family-backend-production.up.railway.app", "localhost:5173"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://fund-family-backend-production.up.railway.app",
+    "http://localhost:5173",
+]
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:5173'
+]
 
 # Application definition
 
@@ -45,21 +53,15 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES":[
-        'rest_framework.authentication.TokenAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
     ],
 }
 # ASGI_APPLICATION = 'core.asgi.application'
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-SWAGGER_SETTINGS = {
-    'SECURITY_DEFINITIONS':{
-        "Basic":{
-            "type":"basic"
-        }
-    }
-}
+SWAGGER_SETTINGS = {"SECURITY_DEFINITIONS": {"Basic": {"type": "basic"}}}
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -117,7 +119,7 @@ DATABASES = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
