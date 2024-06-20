@@ -107,6 +107,16 @@ WSGI_APPLICATION = "fund_family_backend.wsgi.application"
 #     }
 # }
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "railway",
+#         "USER": 'postgres',
+#         "PASSWORD": 'vbszEQzwhkTDOKTDeXkjJMyaukXgtxxI',
+#         "HOST": "monorail.proxy.rlwy.net",
+#         "PORT": '45180',
+#     }
+# }
 DATABASES = {
     "default": {
         "ENGINE": config("ENGINE"),

@@ -7,3 +7,8 @@ class formDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = formData
         fields = "__all__"
+
+class getDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = formData
+        fields = "__all__"
