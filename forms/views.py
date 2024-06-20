@@ -34,7 +34,7 @@ def getAllForm(request):
 #GET ONLY APPROVED FORMS TO DISPLAY
 @api_view(["GET"])
 def getApproved(request):
-    get_approved = formData.objects.all().filter(approved=True)
+    get_approved = formData.objects.all().filter(approval=True)
     if request.method == "GET":
         get_approved_serilizer = getDataSerializer(get_approved, many=True)
         return Response(get_approved_serilizer.data, status=status.HTTP_200_OK)
