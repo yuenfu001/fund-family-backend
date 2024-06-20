@@ -28,7 +28,16 @@ def getAllForm(request):
     get_all_forms = formData.objects.all()
     if request.method == "GET":
         get_allform_serilizer = formDataSerializer(get_all_forms, many=True)
-        return Response(get_allform_serilizer.data, status=status.HTTP_302_FOUND)
+        return Response(get_allform_serilizer.data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
+#GET ONLY APPROVED FORMS TO DISPLAY
+@api_view(["GET"])
+def getApproved(request):
+    get_approved = formData.objects.all().filter(approved=True)
+    if request.method == "GET":
+        get_allform_serilizer = formDataSerializer(get_approved, many=True)
+        return Response(get_allform_serilizer.data, status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 #Unique forms using GET, PUT AND DELETE REQUEST
@@ -42,7 +51,7 @@ def specificForm(request, pk):
     get_specific_form = get_object_or_404(formData, id=pk)
     if request.method =="GET":
         get_specific_serializer = formDataSerializer(get_specific_form)
-        return Response(get_specific_serializer.data, status=status.HTTP_302_FOUND)
+        return Response(get_specific_serializer.data, status=status.HTTP_200_OK)
     
     elif request.method == "PUT":
         update_form_serializer = formDataSerializer(get_specific_form, data=request.data)

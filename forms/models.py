@@ -10,6 +10,7 @@ class formData(models.Model):
     family_in_egypt = models.BooleanField(default=True)
     fund_url = models.CharField(max_length=255)
     comments = models.TextField()
+    approval = models.BooleanField(default=False)
 
 
     def __str__(self):
