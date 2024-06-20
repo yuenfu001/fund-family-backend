@@ -5,5 +5,5 @@ from .models import formData
 @admin.register(formData)
 class formDataAdmin(admin.ModelAdmin):
     list_display = [
-        "name","email","no_of_family","raised_amount","fund_breakdown","fund_url","comments","family_in_egypt"
+        "name","email","no_of_family","raised_amount","fund_breakdown","fund_url","comments","family_in_egypt","approval"
     ]
