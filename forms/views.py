@@ -36,8 +36,8 @@ def getAllForm(request):
 def getApproved(request):
     get_approved = formData.objects.all().filter(approved=True)
     if request.method == "GET":
-        get_allform_serilizer = formDataSerializer(get_approved, many=True)
-        return Response(get_allform_serilizer.data, status=status.HTTP_200_OK)
+        get_approved_serilizer = formDataSerializer(get_approved, many=True)
+        return Response(get_approved_serilizer.data, status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 #Unique forms using GET, PUT AND DELETE REQUEST
