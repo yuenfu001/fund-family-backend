@@ -6,9 +6,13 @@ from .models import formData
 class formDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = formData
-        fields = "__all__"
+        fields = [
+        "name","email","no_of_family","raised_amount","fund_breakdown","fund_url","comments","family_in_egypt"
+    ]
 
 class getDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = formData
-        fields = "__all__"
+        fields = [
+        "name","no_of_family","raised_amount","fund_breakdown","fund_url"
+    ]
