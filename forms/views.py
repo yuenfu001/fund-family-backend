@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response 
 from rest_framework.decorators import api_view
 from .models import formData,approvedForm
-from .serializers import formDataSerializer,approvedFormDataSerializer,getallapprovedFormSerializer
+from .serializers import formDataSerializer,approvedFormDataSerializer,getallDataSerializer,getallapprovedSerializer
 from drf_yasg.utils import swagger_auto_schema
 # Create your views here.
 
@@ -27,7 +27,7 @@ def createForm(request):
 def getAllForm(request):
     get_all_forms = formData.objects.all()
     if request.method == "GET":
-        get_allform_serilizer = formDataSerializer(get_all_forms, many=True)
+        get_allform_serilizer = getallDataSerializer(get_all_forms, many=True)
         return Response(get_allform_serilizer.data, status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)    
 
@@ -76,9 +76,9 @@ def getApproval(request):
 #GET ALL Approved forms using GET REQUEST
 @api_view(["GET"])
 def getAllApprovedForm(request):
-    get_all_approved_forms = approvedForm.objects.all().filter(approval=True)
+    get_all_approved_forms = formData.objects.all().filter(approval=True)
     if request.method == "GET":
-        get_allform_serilizer = getallapprovedFormSerializer(get_all_approved_forms, many=True)
+        get_allform_serilizer = getallapprovedSerializer(get_all_approved_forms, many=True)
         return Response(get_allform_serilizer.data, status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)    
 
