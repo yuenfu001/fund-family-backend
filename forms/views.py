@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response 
 from rest_framework.decorators import api_view
-from .models import formData,approvedForm
+from .models import formData
 from .serializers import formDataSerializer,approvedFormDataSerializer,getallDataSerializer,getallapprovedSerializer
 from drf_yasg.utils import swagger_auto_schema
 # Create your views here.

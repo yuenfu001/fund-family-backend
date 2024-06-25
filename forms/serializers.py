@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import formData,approvedForm
+from .models import formData
 
 #CREATE FORMDATA SERIALIZER FOR API INTEGRATION
 
@@ -17,12 +17,12 @@ class getallDataSerializer(serializers.ModelSerializer):
               
 class approvedFormDataSerializer(serializers.ModelSerializer):
     class Meta:
-        model = approvedForm
+        model = formData
         fields = ['id','approval']
 
 class getallapprovedSerializer(serializers.ModelSerializer):
     class Meta:
-        model = approvedForm
+        model = formData
         fields = [
         "id","name""no_of_family","raised_amount","fund_url","approval"
         ]
