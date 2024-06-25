@@ -2,8 +2,8 @@ from django.shortcuts import render,get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response 
 from rest_framework.decorators import api_view
-from .models import formData
-from .serializers import formDataSerializer,getDataSerializer
+from .models import formData,approvedForm
+from .serializers import formDataSerializer,approvedFormDataSerializer,getallapprovedFormSerializer
 from drf_yasg.utils import swagger_auto_schema
 # Create your views here.
 
@@ -29,16 +29,7 @@ def getAllForm(request):
     if request.method == "GET":
         get_allform_serilizer = formDataSerializer(get_all_forms, many=True)
         return Response(get_allform_serilizer.data, status=status.HTTP_200_OK)
-    return Response(status=status.HTTP_400_BAD_REQUEST)
-
-#GET ONLY APPROVED FORMS TO DISPLAY
-@api_view(["GET"])
-def getApproved(request):
-    get_approved = formData.objects.all().filter(approval=True)
-    if request.method == "GET":
-        get_approved_serilizer = getDataSerializer(get_approved, many=True)
-        return Response(get_approved_serilizer.data, status=status.HTTP_200_OK)
-    return Response(status=status.HTTP_400_BAD_REQUEST)
+    return Response(status=status.HTTP_400_BAD_REQUEST)    
 
 #Unique forms using GET, PUT AND DELETE REQUEST
 @swagger_auto_schema(
@@ -65,3 +56,30 @@ def specificForm(request, pk):
     
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+#GET ONLY APPROVED FORMS TO DISPLAY
+@swagger_auto_schema(
+        methods=["POST"],
+        request_body=approvedFormDataSerializer,
+        operation_description= "Approved Forms"      
+)
+@api_view(["POST"])
+def getApproval(request):
+    if request.method == "POST":
+        get_approved_serializer = approvedFormDataSerializer(data=request.data)
+        if get_approved_serializer.is_valid():
+            get_approved_serializer.save()
+            return Response(get_approved_serializer.data, status=status.HTTP_201_CREATED)
+    return Response(get_approved_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+#GET ALL Approved forms using GET REQUEST
+@api_view(["GET"])
+def getAllApprovedForm(request):
+    get_all_approved_forms = approvedForm.objects.all().filter(approval=True)
+    if request.method == "GET":
+        get_allform_serilizer = getallapprovedFormSerializer(get_all_approved_forms, many=True)
+        return Response(get_allform_serilizer.data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)    
+
+    

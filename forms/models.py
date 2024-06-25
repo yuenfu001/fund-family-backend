@@ -10,8 +10,15 @@ class formData(models.Model):
     family_in_egypt = models.BooleanField(default=True)
     fund_url = models.CharField(max_length=255)
     comments = models.TextField()
-    approval = models.BooleanField()
 
 
     def __str__(self):
         return f"{self.name}"
+
+
+class approvedForm(models.Model):
+    form = models.ForeignKey(formData, on_delete=models.CASCADE, related_name="registration_form")
+    approval = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.form}"
