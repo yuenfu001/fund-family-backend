@@ -67,7 +67,7 @@ def specificForm(request, pk):
 def getApproval(request,pk):
     get_specific_form = get_object_or_404(formData, id=pk)
     if request.method == "PUT":
-        get_approved_serializer = approvedFormDataSerializer(get_specific_form)
+        get_approved_serializer = approvedFormDataSerializer(get_specific_form,data=request.data)
         if get_approved_serializer.is_valid():
             get_approved_serializer.save()
             return Response(get_approved_serializer.data, status=status.HTTP_202_ACCEPTED)
