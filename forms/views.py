@@ -59,17 +59,18 @@ def specificForm(request, pk):
     
 #GET ONLY APPROVED FORMS TO DISPLAY
 @swagger_auto_schema(
-        methods=["POST"],
+        methods=["PUT"],
         request_body=approvedFormDataSerializer,
         operation_description= "Approved Forms"      
 )
-@api_view(["POST"])
-def getApproval(request):
-    if request.method == "POST":
-        get_approved_serializer = approvedFormDataSerializer(data=request.data)
+@api_view(["PUT"])
+def getApproval(request,pk):
+    get_specific_form = get_object_or_404(formData, id=pk)
+    if request.method == "PUT":
+        get_approved_serializer = approvedFormDataSerializer(get_specific_form)
         if get_approved_serializer.is_valid():
             get_approved_serializer.save()
-            return Response(get_approved_serializer.data, status=status.HTTP_201_CREATED)
+            return Response(get_approved_serializer.data, status=status.HTTP_202_ACCEPTED)
     return Response(get_approved_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
