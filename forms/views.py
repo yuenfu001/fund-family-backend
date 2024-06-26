@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from rest_framework import status
 from rest_framework.response import Response 
 from rest_framework.decorators import api_view
@@ -68,11 +68,10 @@ def specificForm(request, pk):
 def getApproval(request,pk):
     get_specific_form = get_object_or_404(formData, id=pk)
     if request.method == "POST":
-        get_approved_form = ApprovalFrom(request.POST or None, instance=get_specific_form)
+        get_approved_form = ApprovalFrom(request.POST, instance=get_specific_form)
         if get_approved_form.is_valid():
             get_approved_form.save()
-            return render("allform")
-    
+            return redirect("allform")
     else:
         get_approved_form = ApprovalFrom(instance=get_specific_form)
     context = {
