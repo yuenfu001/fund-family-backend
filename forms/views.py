@@ -3,7 +3,8 @@ from rest_framework import status
 from rest_framework.response import Response 
 from rest_framework.decorators import api_view
 from .models import formData
-from .serializers import formDataSerializer,approvedFormDataSerializer,getallDataSerializer,getallapprovedSerializer
+from .serializers import formDataSerializer,getallDataSerializer,getallapprovedSerializer
+from .forms import ApprovalFrom
 from drf_yasg.utils import swagger_auto_schema
 # Create your views here.
 
@@ -57,21 +58,27 @@ def specificForm(request, pk):
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
     
-#GET ONLY APPROVED FORMS TO DISPLAY
-@swagger_auto_schema(
-        methods=["PUT"],
-        request_body=approvedFormDataSerializer,
-        operation_description= "Approved Forms"      
-)
-@api_view(["PUT"])
+# #GET ONLY APPROVED FORMS TO DISPLAY
+# @swagger_auto_schema(
+#         methods=["PUT"],
+#         request_body=approvedFormDataSerializer,
+#         operation_description= "Approved Forms"      
+# )
+# @api_view(["PUT"])
 def getApproval(request,pk):
     get_specific_form = get_object_or_404(formData, id=pk)
-    if request.method == "PUT":
-        get_approved_serializer = approvedFormDataSerializer(get_specific_form,data=request.data)
-        if get_approved_serializer.is_valid():
-            get_approved_serializer.save()
-            return Response(get_approved_serializer.data, status=status.HTTP_202_ACCEPTED)
-    return Response(get_approved_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    if request.method == "POST":
+        get_approved_form = ApprovalFrom(request.POST or None, instance=get_specific_form)
+        if get_approved_form.is_valid():
+            get_approved_form.save()
+            return render("")
+    
+    else:
+        get_approved_form = ApprovalFrom(instance=get_specific_form)
+    context = {
+        "form":get_approved_form
+    }
+    return render(request, "approval.html", context)
 
 
 #GET ALL Approved forms using GET REQUEST

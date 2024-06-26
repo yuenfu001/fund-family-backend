@@ -27,14 +27,12 @@ SECRET_KEY = config("KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("BUG")
 
-ALLOWED_HOSTS = ["fund-family-backend-production.up.railway.app", "localhost:5173","*"]
+ALLOWED_HOSTS = ["fund-family-backend-production.up.railway.app", "localhost:5173", "*"]
 CSRF_TRUSTED_ORIGINS = [
     "https://fund-family-backend-production.up.railway.app",
     "http://localhost:5173",
 ]
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:5173'
-]
+CORS_ORIGIN_WHITELIST = ["http://localhost:5173"]
 
 # Application definition
 
@@ -50,7 +48,13 @@ INSTALLED_APPS = [
     "drf_yasg",
     "forms",
     "corsheaders",
+    "crispy_forms",
 ]
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
@@ -81,7 +85,7 @@ ROOT_URLCONF = "fund_family_backend.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
