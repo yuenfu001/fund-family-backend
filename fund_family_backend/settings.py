@@ -37,6 +37,7 @@ CORS_ORIGIN_WHITELIST = ["http://localhost:5173"]
 # Application definition
 
 INSTALLED_APPS = [
+    "unfold",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
