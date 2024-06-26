@@ -71,7 +71,7 @@ def getApproval(request,pk):
         get_approved_form = ApprovalFrom(request.POST or None, instance=get_specific_form)
         if get_approved_form.is_valid():
             get_approved_form.save()
-            return render("")
+            return render("allform")
     
     else:
         get_approved_form = ApprovalFrom(instance=get_specific_form)
