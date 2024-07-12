@@ -24,5 +24,5 @@ class getallapprovedSerializer(serializers.ModelSerializer):
     class Meta:
         model = formData
         fields = [
-        "id","name","no_of_family","raised_amount","fund_url","approval"
+        "id","name","no_of_family","raised_amount","fund_breakdown","fund_url","approval"
         ]
